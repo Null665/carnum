@@ -1,3 +1,4 @@
 venv/
 # Pycharm ide files probably are not needed too
 .idea/
+*.pyc
