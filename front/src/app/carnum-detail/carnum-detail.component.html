@@ -1,0 +1,9 @@
+<div *ngIf="carnum">
+    <label>Car number:
+      <input [(ngModel)]="carnum.number" placeholder="AAA-001">
+    </label>
+    <label>Who owns it (username):
+      <input [(ngModel)]="carnum.user" placeholder="who">
+    </label>
+    <button (click)="save()">Save</button>
+</div>

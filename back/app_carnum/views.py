@@ -55,8 +55,8 @@ def delete(request, id):
     return JsonResponse(status=204)
 
 
-@csrf_exempt  # FIXME: THIS IS BAD I GUESS BUT IDK WHAT TO DO YET
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt  # FIXME: THIS IS BAD I GUESS BUT IDK WHAT TO DO YET
 def item(request, id=None):
     """
     API endpoint for Car plate number CRUD operations
