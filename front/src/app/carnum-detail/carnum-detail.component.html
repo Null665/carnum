@@ -1,9 +1,12 @@
 <div *ngIf="carnum">
-    <label>Car number:
-      <input [(ngModel)]="carnum.number" placeholder="AAA-001">
-    </label>
-    <label>Who owns it (username):
-      <input [(ngModel)]="carnum.user" placeholder="who">
-    </label>
-    <button (click)="save()">Save</button>
+
+   <div class="form-group">
+      <label>Car number:</label>
+      <input [(ngModel)]="carnum.number" placeholder="AAA-001" class="form-control">
+   </div>
+   <div class="form-group">
+     <label>Who owns it (username):</label>
+     <input [(ngModel)]="carnum.user" placeholder="who" class="form-control">
+   </div>
+    <button (click)="save()" class="btn btn-default">Save</button>
 </div>

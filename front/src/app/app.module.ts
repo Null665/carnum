@@ -9,7 +9,6 @@ import {HttpClientModule} from "@angular/common/http";
 import { CarnumDetailComponent } from './carnum-detail/carnum-detail.component';
 import {FormsModule} from "@angular/forms";
 
-
 @NgModule({
   declarations: [
     AppComponent,

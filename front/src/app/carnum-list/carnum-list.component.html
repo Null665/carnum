@@ -1,11 +1,30 @@
-<p>
-  carnum-list works!
-</p>
-<div *ngIf="carNumbers">
-  <ul>
-      <li *ngFor="let carnum of carNumbers" (click)="selectCarNum(carnum)"> {{ carnum.number }}</li>
-      <li (click)="newItemForm()"> [Add new]</li>
-  </ul>
+<div class="row">
+  <div class="col-md-5">
+
+    <div *ngIf="carNumbers">
+      <div class="list-group">
+
+        <a *ngFor="let carnum of carNumbers"
+            (click)="selectCarNum(carnum)"
+            class="list-group-item list-group-item-action"
+            [class.active]="carnum === selectedCarnum"
+            href="#">
+          {{ carnum.number }}
+        </a>
+        <a (click)="newItemForm()"
+            class="list-group-item list-group-item-action"
+            href="#"
+            [class.active]="selectedCarnum.id === null">
+          [Add new]
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <app-carnum-detail [carnum]="selectedCarnum"></app-carnum-detail>
+  </div>
 </div>
 
-<app-carnum-detail [carnum]="selectedCarnum"></app-carnum-detail>
+
