@@ -26,4 +26,8 @@ export class CarnumDetailComponent implements OnInit {
     }
   }
 
+  delete() {
+    this.api.delete(this.carnum).subscribe();
+  }
+
 }

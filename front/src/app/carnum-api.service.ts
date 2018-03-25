@@ -29,4 +29,8 @@ export class CarnumApiService {
     return this.http.put<Carnum>(url, carnum, httpOptions)
   }
 
+  delete(carnum: Carnum): Observable<Carnum> {
+    let url = this.API_ENDPOINT+"item/"+carnum.id+"/";
+    return this.http.delete<Carnum>(url)
+  }
 }

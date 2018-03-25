@@ -9,4 +9,5 @@
      <input [(ngModel)]="carnum.user" placeholder="who" class="form-control">
    </div>
     <button (click)="save()" class="btn btn-default">Save</button>
+    <button (click)="delete()" class="btn btn-danger" [class.disabled]="carnum.id == null">Delete</button>
 </div>

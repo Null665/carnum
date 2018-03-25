@@ -2,23 +2,24 @@
   <div class="col-md-5">
 
     <div *ngIf="carNumbers">
-      <div class="list-group">
+      <ul class="list-group">
 
-        <a *ngFor="let carnum of carNumbers"
+        <li *ngFor="let carnum of carNumbers"
             (click)="selectCarNum(carnum)"
             class="list-group-item list-group-item-action"
             [class.active]="carnum === selectedCarnum"
             href="#">
+          <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
           {{ carnum.number }}
-        </a>
-        <a (click)="newItemForm()"
+        </li>
+        <li (click)="newItemForm()"
             class="list-group-item list-group-item-action"
             href="#"
-            [class.active]="selectedCarnum.id === null">
+            [class.active]="selectedCarnum && selectedCarnum.id === null">
           [Add new]
-        </a>
+        </li>
 
-      </div>
+      </ul>
     </div>
   </div>
 

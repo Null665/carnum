@@ -52,7 +52,7 @@ def update(request, id):
 
 def delete(request, id):
     get_object_or_404(CarNumber, id=id).delete()
-    return JsonResponse(status=204)
+    return JsonResponse(data={}, status=204)
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
