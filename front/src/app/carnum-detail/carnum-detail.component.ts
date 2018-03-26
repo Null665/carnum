@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Carnum} from "../carnum";
 import {CarnumApiService} from "../carnum-api.service";
 
@@ -15,19 +15,29 @@ export class CarnumDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Output() messageEvent = new EventEmitter<object>();
+  sendMessage(obj: object) {
+    this.messageEvent.emit(obj);
+  }
+
+
   save(): void {
     if(this.carnum.id == null) {
-       console.log("create");
-      this.api.create(this.carnum).subscribe();
+      this.api.create(this.carnum).subscribe(carnum =>this.sendMessage({
+        method: 'POST',
+        carnum: carnum,
+      }));
     }
     else {
-      console.log("update");
       this.api.update(this.carnum).subscribe();
     }
   }
 
   delete() {
-    this.api.delete(this.carnum).subscribe();
+    this.api.delete(this.carnum).subscribe(carnum =>this.sendMessage({
+        method: 'DELETE',
+        carnum: this.carnum,
+      }));
   }
 
 }

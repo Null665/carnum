@@ -7,7 +7,7 @@ import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'app-carnum-list',
   templateUrl: './carnum-list.component.html',
-  styleUrls: ['./carnum-list.component.css']
+  styleUrls: ['./carnum-list.component.css'],
 })
 export class CarnumListComponent implements OnInit {
   carNumbers : Carnum[];
@@ -17,6 +17,22 @@ export class CarnumListComponent implements OnInit {
 
   ngOnInit() {
     this.getCarNumbers();
+  }
+
+  // Receive messages from detail component
+  // and update list accordingly
+  receiveMessage($event) {
+    //console.log($event);
+    if($event.method == 'POST')
+      this.carNumbers.push($event.carnum);
+    else if($event.method == 'DELETE') {
+      for(let i=0;i<this.carNumbers.length;i++)
+        if(this.carNumbers[i].id == $event.carnum.id) {
+          this.carNumbers.splice(i, 1);
+          break;
+        }
+
+    }
   }
 
   // Get all car numbers from database
@@ -33,4 +49,6 @@ export class CarnumListComponent implements OnInit {
   newItemForm() {
     this.selectedCarnum = {id: null, user: null, number: null};
   }
+
+
 }
