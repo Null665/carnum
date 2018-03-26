@@ -19,4 +19,4 @@ class CarNumberForm(forms.ModelForm):
     @staticmethod
     def is_valid_car_number(number):
         number = number.upper()
-        return re.match("^[A-Z]{3}-\d{3}$", number)
+        return re.match("^[A-Z]{3}-\d{3}$", number) is not None
