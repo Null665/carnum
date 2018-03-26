@@ -13,7 +13,7 @@ class CarNumberSerializer(serializers.Serializer):
     user = serializers.CharField()
 
     def get_user(self, username):
-        return get_object_or_404(User, username=username)
+        return User.objects.get_or_create(username=username)[0]
 
     def validate(self, attrs):
         if not CarNumberForm.is_valid_car_number(attrs.get('number','')):
@@ -22,13 +22,13 @@ class CarNumberSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         unique_fields = {
-            'number': validated_data['number'],
+            'number': validated_data['number'].upper(),
             'user': self.get_user(validated_data['user']),
         }
         return CarNumber.objects.create(**unique_fields)
 
     def update(self, instance, validated_data):
-        instance.number = validated_data.get('number', instance.number)
+        instance.number = validated_data.get('number', instance.number).upper()
         instance.user = self.get_user(validated_data.get('user', instance.user.username))
         instance.save()
         return instance
