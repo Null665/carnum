@@ -32,7 +32,7 @@ def create(request, *args):
         obj = serializer.save()
         return JsonResponse(CarNumberSerializer(obj).data, safe=False)
     else:
-        return HttpResponse(str(serializer.errors), status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
 def read(request, id):

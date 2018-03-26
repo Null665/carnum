@@ -22,7 +22,9 @@ export class CarnumListComponent implements OnInit {
   // Receive messages from detail component
   // and update list accordingly
   receiveMessage($event) {
-    //console.log($event);
+    if($event.method === null || $event.carnum === null)
+      return;
+
     if($event.method == 'POST')
       this.carNumbers.push($event.carnum);
     else if($event.method == 'DELETE') {
