@@ -55,7 +55,7 @@ def delete(request, id):
     return JsonResponse(data={}, status=204)
 
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+
 @csrf_exempt  # FIXME: THIS IS BAD I GUESS BUT IDK WHAT TO DO YET
 def item(request, id=None):
     """

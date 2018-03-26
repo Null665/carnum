@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class CarnumApiService {
 
-  readonly API_ENDPOINT = "http://127.0.0.1:8000/carnum/";
+  readonly API_ENDPOINT = "carnum/";
 
   constructor(private http: HttpClient) { }
 

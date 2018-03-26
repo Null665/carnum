@@ -2,3 +2,7 @@ venv/
 # Pycharm ide files probably are not needed too
 .idea/
 *.pyc
+# staticfiles dir - managed by collectstatic
+back/static/
+# keep db only locally
+db.sqlite3
