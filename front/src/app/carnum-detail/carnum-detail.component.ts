@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Carnum} from "../carnum";
 import {CarnumApiService} from "../carnum-api.service";
-import {of} from "rxjs/observable/of";
 import {Observable} from "rxjs/Observable";
-import {catchError} from "rxjs/operators";
 import { JsonPipe } from '@angular/common';
 
 @Component({
@@ -13,55 +11,25 @@ import { JsonPipe } from '@angular/common';
 })
 export class CarnumDetailComponent implements OnInit {
   @Input() carnum: Carnum;
-  errors: string;
+  errors: Observable<{}>;
 
   constructor(private api: CarnumApiService) { }
 
   ngOnInit() {
+    this.errors = this.api.getErrors();
   }
-
-  @Output() messageEvent = new EventEmitter<object>();
-  sendMessage(obj: object) {
-    this.messageEvent.emit(obj);
-  }
-
-  clearErrors(): void {
-    this.errors = null;
-  }
-
 
   save(): void {
-    this.clearErrors();
     if(this.carnum.id == null) {
-      this.api.create(this.carnum).pipe( catchError(this.handleError('create', null))).
-      subscribe(carnum =>this.sendMessage({
-        method: 'POST',
-        carnum: carnum,
-      }));
+      this.api.create(this.carnum);
     }
     else {
-      this.api.update(this.carnum).pipe( catchError(this.handleError('update', null))).
-      subscribe()
+      this.api.update(this.carnum);
     }
   }
 
   delete() {
-    this.clearErrors();
-    this.api.delete(this.carnum).pipe( catchError(this.handleError('delete', null))).
-    subscribe(carnum =>this.sendMessage({
-        method: 'DELETE',
-        carnum: this.carnum,
-      }));
+    this.api.delete(this.carnum);
   }
 
-  // Bad, only displays one specific error type
-  private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
-
-    console.log(error.error.non_field_errors);
-    this.errors = error.error;
-
-    return of(result as T);
-  };
-}
 }

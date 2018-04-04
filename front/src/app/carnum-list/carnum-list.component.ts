@@ -10,36 +10,13 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./carnum-list.component.css'],
 })
 export class CarnumListComponent implements OnInit {
-  carNumbers : Carnum[];
   selectedCarnum: Carnum;
+  carNumbers: Observable<Carnum[]>;
 
-  constructor(private carnumApi: CarnumApiService) { }
+  constructor(private carnumApi: CarnumApiService) {}
 
   ngOnInit() {
-    this.getCarNumbers();
-  }
-
-  // Receive messages from detail component
-  // and update list accordingly
-  receiveMessage($event) {
-    if($event.method === null || $event.carnum === null)
-      return;
-
-    if($event.method == 'POST')
-      this.carNumbers.push($event.carnum);
-    else if($event.method == 'DELETE') {
-      for(let i=0;i<this.carNumbers.length;i++)
-        if(this.carNumbers[i].id == $event.carnum.id) {
-          this.carNumbers.splice(i, 1);
-          break;
-        }
-
-    }
-  }
-
-  // Get all car numbers from database
-  getCarNumbers(): void {
-    this.carnumApi.getCarNumbers().subscribe(carNumbers => this.carNumbers = carNumbers);
+    this.carNumbers = this.carnumApi.getCarNumbers();
   }
 
   // user clicks an item, item gets used by 'detail' component

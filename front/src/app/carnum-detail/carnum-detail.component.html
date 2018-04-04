@@ -1,8 +1,8 @@
-<div *ngIf="errors">
+<div *ngIf="errors | async">
   <div class="alert alert-danger">
     An error occured <br>
     <ul>
-      <li *ngFor="let e of errors.non_field_errors"> {{ e }}</li>
+      <li *ngFor="let e of errors.non_field_errors | async"> {{ e }}</li>
     </ul>
   </div>
 </div>
