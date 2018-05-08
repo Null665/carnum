@@ -13,3 +13,6 @@ python manage.py runserver
 or `./run.sh`
 
 And then http://127.0.0.1:8000
+
+---
+If you use this code for any employment opportunity and you are not me, you should die.
